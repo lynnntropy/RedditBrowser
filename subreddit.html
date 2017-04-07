@@ -1,0 +1,20 @@
+<div class="post panel panel-default" ng-repeat="post in posts">
+    <div class="panel-body">
+        <div class="title">
+            <span class="score">{{post.score}}</span> -
+            <a href="{{post.url}}">{{post.title}}</a>
+            <span class="domain">({{post.domain}})</span>
+        </div>
+        <div class="details">
+            Submitted at
+            <span class="time">{{post.created_utc * 1000 | date:'HH:mm'}}</span>
+            by
+            <a href="#">/u/{{post.author.name}}</a>
+            to
+            <a href="/r/{{post.subreddit.display_name}}">/r/{{post.subreddit.display_name}}</a>
+        </div>
+        <div class="buttons">
+            <a class="post-button" href="{{post.permalink}}">{{post.num_comments}} comments</a>
+        </div>
+    </div>
+</div>

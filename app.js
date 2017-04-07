@@ -1,44 +1,79 @@
-angular.module('redditBrowser', ['ngRoute'])
+function makeUniqueId()
+{
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-    .factory('redditService', function($http) {
+    for( var i=0; i < 25; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+}
+
+angular.module('redditBrowser', ['ngRoute', 'angularMoment'])
+
+    .value('redditCredentials', 'bIDYcVWjkQJ0sA:T4AyTTjRj0CjIWKzgvsghfTPnkM')
+
+    .factory('redditService', function($http, redditCredentials, $httpParamSerializerJQLike) {
+
+        var reddit = null;
 
         var getAccessToken = function()
         {
             var postData = {
                 grant_type: 'https://oauth.reddit.com/grants/installed_client',
-                device_id: '123456789012345697802121'
+                device_id: makeUniqueId()
             };
 
             var headers = {
-                "Authorization": "Basic " + btoa("bIDYcVWjkQJ0sA:T4AyTTjRj0CjIWKzgvsghfTPnkM"),
+                "Authorization": "Basic " + btoa(redditCredentials),
                 'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
             };
 
-            return $http.post('https://www.reddit.com/api/v1/access_token', $.param(postData), {headers: headers})
+            return $http.post('https://www.reddit.com/api/v1/access_token', $httpParamSerializerJQLike(postData), {headers: headers})
+        };
+
+        var init = function()
+        {
+            return new Promise(function (resolve, reject) {
+                getAccessToken().then(function (res) {
+                    console.log(res);
+                    reddit = new snoowrap({
+                        userAgent: 'RedditBrowser by /u/OmegaVesko',
+                        accessToken: res.data.access_token
+                    });
+                    console.log(reddit);
+                    resolve(reddit)
+                });
+            });
         };
 
         var getSubreddit = function(subreddit)
         {
-            return new Promise(function(resolve, reject) {
-                    resolve([]);
-            });
+            return reddit.getSubreddit(subreddit).getHot();
         };
 
         return {
-            getAccessToken: getAccessToken,
+            init: init,
             getSubreddit: getSubreddit
         };
     })
 
     .controller('MainController', function($scope, $rootScope, $location, redditService) {
-        redditService.getAccessToken().then(function (res) {
-            console.log(res);
-        });
+        redditService.init().then(function (res) {
+            console.log('Reddit initialized with token: ' + res.accessToken);
+            $scope.$apply(function () {
+                $location.path('/r/all');
+            });
+        })
     })
 
     .controller('SubredditController', function($scope, $route, redditService) {
-        redditService.getSubreddit($route.current.params['subreddit']).then(function(res) {
-            console.log(res);
+        $scope.posts = [];
+        redditService.getSubreddit($route.current.params['subreddit']).then(function(posts) {
+            console.log(posts);
+            $scope.$apply(function () {
+                $scope.posts = posts;
+            });
         })
     })
 

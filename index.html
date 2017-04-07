@@ -6,15 +6,25 @@
 
     <title>Reddit</title>
 
-    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="app.css" rel="stylesheet">
 </head>
 <body ng-controller="MainController">
-<div ng-view></div>
-
+<div class="container">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/r/all">RedditBrowser</a>
+            </div>
+        </div>
+    </nav>
+    <div ng-view></div>
+</div>
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
 <script src="node_modules/angular/angular.min.js"></script>
 <script src="node_modules/angular-route/angular-route.min.js"></script>
+<script src="node_modules/moment/min/moment-with-locales.min.js"></script>
+<script src="node_modules/angular-moment/angular-moment.min.js"></script>
 <script src="snoowrap-v1.min.js"></script>
 <script src="app.js"></script>
 </body>
