@@ -22,3 +22,19 @@ body
 {
     margin-bottom: 0;
 }
+
+comment > .panel
+{
+    margin-bottom: 0;
+}
+
+comment.multiple-replies > .panel,
+.post-page > .comments > comment > .panel
+{
+    margin-bottom: 10px;
+}
+
+comment > .panel.no-replies p:last-child
+{
+    margin-bottom: 0;
+}

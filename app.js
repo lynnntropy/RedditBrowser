@@ -100,6 +100,16 @@ angular.module('redditBrowser', ['ngRoute', 'ngSanitize', 'angularMoment'])
         })
     })
 
+    .directive('comment', function () {
+        return {
+            restrict: 'E',
+            templateUrl: 'comment.html',
+            scope: {
+                comment: '=bindComment'
+            }
+        }
+    })
+
     .config(function($routeProvider, $locationProvider) {
         $routeProvider
             .when('/r/:subreddit', {

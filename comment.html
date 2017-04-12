@@ -1,0 +1,6 @@
+<div class="panel panel-default" ng-class="{'no-replies': comment.replies.length == 0}">
+    <div class="panel-body">
+        <div class="comment-content" ng-bind-html="comment.body_html"></div>
+        <comment ng-repeat="reply in comment.replies" ng-class="{'multiple-replies': comment.replies.length > 1}"  bind-comment="reply"></comment>
+    </div>
+</div>
