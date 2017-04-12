@@ -9,7 +9,7 @@ function makeUniqueId()
     return text;
 }
 
-angular.module('redditBrowser', ['ngRoute', 'angularMoment'])
+angular.module('redditBrowser', ['ngRoute', 'ngSanitize', 'angularMoment'])
 
     .value('redditCredentials', 'bIDYcVWjkQJ0sA:T4AyTTjRj0CjIWKzgvsghfTPnkM')
 
@@ -52,9 +52,15 @@ angular.module('redditBrowser', ['ngRoute', 'angularMoment'])
             return reddit.getSubreddit(subreddit).getHot();
         };
 
+        var getPost = function(postId)
+        {
+            return reddit.getSubmission(postId).fetch();
+        };
+
         return {
             init: init,
-            getSubreddit: getSubreddit
+            getSubreddit: getSubreddit,
+            getPost: getPost
         };
     })
 
@@ -84,11 +90,25 @@ angular.module('redditBrowser', ['ngRoute', 'angularMoment'])
         })
     })
 
+    .controller('PostController', function($scope, $route, redditService) {
+        redditService.getPost($route.current.params['postId']).then(function (post) {
+            console.log(post);
+            $scope.$apply(function () {
+                $scope.post = post;
+                $scope.post.moment = moment($scope.post.created_utc * 1000);
+            });
+        })
+    })
+
     .config(function($routeProvider, $locationProvider) {
         $routeProvider
             .when('/r/:subreddit', {
                 templateUrl: 'subreddit.html',
                 controller: 'SubredditController'
+            })
+            .when('/r/:subreddit/comments/:postId/:slug', {
+                templateUrl: 'post.html',
+                controller: 'PostController'
             });
 
         $locationProvider.html5Mode(true);

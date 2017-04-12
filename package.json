@@ -12,6 +12,7 @@
     "angular": "^1.6.4",
     "angular-moment": "^1.0.1",
     "angular-route": "^1.6.4",
+    "angular-sanitize": "^1.6.4",
     "bootstrap": "^3.3.7",
     "moment": "^2.18.1",
     "snoowrap": "^1.13.0"

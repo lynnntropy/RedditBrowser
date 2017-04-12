@@ -12,3 +12,13 @@ body
 {
     opacity: 0.75;
 }
+
+.post .selftext
+{
+    margin-top: 20px;
+}
+
+.post .selftext .selftext-content p:last-child
+{
+    margin-bottom: 0;
+}

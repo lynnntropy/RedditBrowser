@@ -1,0 +1,27 @@
+<div class="post-page">
+    <div class="post panel panel-default">
+        <div class="panel-body">
+            <div class="title">
+                <span class="score">{{post.score}}</span> -
+                <a href="{{post.url}}">{{post.title}}</a>
+                <span class="domain">({{post.domain}})</span>
+            </div>
+            <div class="details">
+                Submitted by
+                <a href="#">/u/{{post.author.name}}</a>
+                to
+                <a href="/r/{{post.subreddit.display_name}}">/r/{{post.subreddit.display_name}}</a>
+                <span class="relative-time" am-time-ago="post.moment"></span>
+                <span class="time">({{post.moment | amDateFormat:'MMMM Do, h:mm a'}})</span>
+            </div>
+            <div class="buttons">
+                <a class="post-button" href="{{post.permalink}}">{{post.num_comments}} comments</a>
+            </div>
+
+            <div class="selftext" ng-if="post.selftext_html">
+                <hr>
+                <div class="selftext-content" ng-bind-html="post.selftext_html"></div>
+            </div>
+        </div>
+    </div>
+</div>
