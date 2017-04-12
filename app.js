@@ -64,6 +64,11 @@ angular.module('redditBrowser', ['ngRoute', 'angularMoment'])
             $scope.$apply(function () {
                 $location.path('/r/all');
             });
+
+            $scope.openSubreddit = function()
+            {
+                $location.path('/r/' + $scope.subredditInput);
+            }
         })
     })
 

@@ -16,6 +16,12 @@
             <div class="navbar-header">
                 <a class="navbar-brand" href="/r/all">RedditBrowser</a>
             </div>
+            <form class="navbar-form navbar-left" ng-submit="openSubreddit()">
+                <div class="form-group">
+                    <input ng-model="subredditInput" type="text" class="form-control" placeholder="Subreddit...">
+                </div>
+                <button type="submit" class="btn btn-default">Go</button>
+            </form>
         </div>
     </nav>
     <div ng-view></div>
