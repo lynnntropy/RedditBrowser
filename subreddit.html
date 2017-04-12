@@ -6,12 +6,12 @@
             <span class="domain">({{post.domain}})</span>
         </div>
         <div class="details">
-            Submitted at
-            <span class="time">{{post.created_utc * 1000 | date:'HH:mm'}}</span>
-            by
+            Submitted by
             <a href="#">/u/{{post.author.name}}</a>
             to
             <a href="/r/{{post.subreddit.display_name}}">/r/{{post.subreddit.display_name}}</a>
+            <span class="relative-time" am-time-ago="post.moment"></span>
+            <span class="time">({{post.moment | amDateFormat:'MMMM Do, h:mm a'}})</span>
         </div>
         <div class="buttons">
             <a class="post-button" href="{{post.permalink}}">{{post.num_comments}} comments</a>

@@ -68,11 +68,13 @@ angular.module('redditBrowser', ['ngRoute', 'angularMoment'])
     })
 
     .controller('SubredditController', function($scope, $route, redditService) {
-        $scope.posts = [];
         redditService.getSubreddit($route.current.params['subreddit']).then(function(posts) {
             console.log(posts);
             $scope.$apply(function () {
                 $scope.posts = posts;
+                $scope.posts.forEach(function (item) {
+                    item.moment = moment(item.created_utc * 1000);
+                });
             });
         })
     })

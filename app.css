@@ -7,3 +7,8 @@ body
 {
     max-width: 950px;
 }
+
+.post .details .time
+{
+    opacity: 0.75;
+}
