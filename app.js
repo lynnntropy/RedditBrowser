@@ -96,6 +96,7 @@ angular.module('redditBrowser', ['ngRoute', 'ngSanitize', 'angularMoment'])
             $scope.$apply(function () {
                 $scope.post = post;
                 $scope.post.moment = moment($scope.post.created_utc * 1000);
+                $scope.post.comments
             });
         })
     })
