@@ -32,10 +32,12 @@ body
 .post .thumb
 {
     position: absolute;
-    right: 10px;
-    top: 10px;
-    bottom: 10px;
+    right: 5px;
+    top: 5px;
+    bottom: 5px;
     width: 100px;
+
+    border-radius: 4px;
 }
 
 comment > .panel
