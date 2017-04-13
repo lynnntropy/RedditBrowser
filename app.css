@@ -8,6 +8,12 @@ body
     max-width: 950px;
 }
 
+.post
+{
+    position: relative;
+    padding-right: 120px;
+}
+
 .post .details .time
 {
     opacity: 0.75;
@@ -21,6 +27,15 @@ body
 .post .selftext .selftext-content p:last-child
 {
     margin-bottom: 0;
+}
+
+.post .thumb
+{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    bottom: 10px;
+    width: 100px;
 }
 
 comment > .panel
