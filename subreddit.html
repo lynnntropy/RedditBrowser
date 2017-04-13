@@ -15,6 +15,7 @@
         </div>
         <div class="buttons">
             <a class="post-button" href="{{post.permalink}}">{{post.num_comments}} comments</a>
+            <span class="stickied" ng-if="post.stickied"> - stickied post</span>
         </div>
         <div class="thumb" ng-style="{'background-image':'url('+post.thumbnail+')'}"></div>
     </div>
