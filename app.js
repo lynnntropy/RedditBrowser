@@ -57,18 +57,27 @@ angular.module('redditBrowser', ['ngRoute', 'ngSanitize', 'angularMoment'])
             return reddit.getSubmission(postId).fetch();
         };
 
+        var getPopularSubreddits = function()
+        {
+            return reddit.getPopularSubreddits();
+        };
+
         return {
             init: init,
             getSubreddit: getSubreddit,
-            getPost: getPost
+            getPost: getPost,
+            getPopularSubreddits: getPopularSubreddits
         };
     })
 
     .controller('MainController', function($scope, $rootScope, $location, redditService) {
         redditService.init().then(function (res) {
-            console.log('Reddit initialized with token: ' + res.accessToken);
             $scope.$apply(function () {
                 $location.path('/r/all');
+                redditService.getPopularSubreddits().then(function (subreddits) {
+                    $scope.popularSubreddits = subreddits.slice(0, 5);
+                    console.log($scope.popularSubreddits);
+                })
             });
 
             $scope.openSubreddit = function()
@@ -109,6 +118,10 @@ angular.module('redditBrowser', ['ngRoute', 'ngSanitize', 'angularMoment'])
                 comment: '=bindComment'
             }
         }
+    })
+
+    .controller('CommentController', function($scope) {
+        $scope.comment.moment = moment($scope.comment.created_utc * 1000);
     })
 
     .config(function($routeProvider, $locationProvider) {

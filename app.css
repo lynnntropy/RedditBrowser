@@ -37,3 +37,18 @@ comment > .panel.no-replies p:last-child
 {
     margin-bottom: 0;
 }
+
+comment .score
+{
+    font-weight: bold;
+}
+
+comment .absolute-time
+{
+    opacity: 0.75;
+}
+
+comment .panel .panel-body
+{
+    padding: 10px 5px 10px 10px;
+}
