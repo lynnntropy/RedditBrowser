@@ -2,7 +2,7 @@
     <div class="panel-body">
         <div class="comment-details">
             <a class="username" href="#">{{comment.author.name}}</a> -
-            <span class="score">{{comment.score}} points</span>
+            <span class="score">{{ comment.score_hidden ? "[score hidden]" : comment.score + " points"}}</span>
             <span class="relative-time" am-time-ago="comment.moment"></span>
             <span class="absolute-time">({{comment.moment | amDateFormat:'MMMM Do, h:mm a'}})</span>
         </div>
